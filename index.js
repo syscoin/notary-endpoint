@@ -20,8 +20,8 @@ app.post("/notarize", async (req, res, next) => {
     const signedhash = await signHash(sighash);
     console.log("signedhash:", signedhash);
     const updatedtx = await assetTransactionNotarize(tx_hex, signedhash);
-        console.log("updatedtx:", updatedtx);
-     res.json({'sig': signedhash});
+    console.log("updatedtx:", updatedtx);
+    res.json({'sigs': [{ 'asset': asset_guid, 'sig': signedhash}]});
   }
 });
 
