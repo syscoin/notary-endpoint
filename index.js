@@ -1,5 +1,6 @@
 const express = require("express");
 const syscoin = require('@syscoin/syscoin-js');
+const cors = require('cors');
 
 const syscoinClient = new syscoin.SyscoinRpcClient({host: 'localhost', rpcPort: '18370', username: 'username', password: 'password'});
 const notaryAddress = 'tsys1qm4vy6pdfyz4dflwwjstxqn30wlynrsl4rz4n4v';
@@ -7,6 +8,7 @@ const asset_guid = '2102391361';
 
 var app = express();
 app.use(express.json());
+app.use(cors());
 app.listen(8081, () => {
   console.log("Server running on port 8081");
 });
