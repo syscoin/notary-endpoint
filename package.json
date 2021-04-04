@@ -1,21 +1,49 @@
 {
-  "name": "notary-rest",
+  "name": "notary-endpoint",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "author": "",
   "license": "ISC",
   "scripts": {
-    "standard": "standard",
-    "test": "npm run standard"
+    "test": "jest",
+    "tsc": "tsc",
+    "dev": "ts-node-dev --respawn --transpile-only ./app/index.ts",
+    "prod": "tsc && cp ./app/swagger.json ./build/  && node ./build/index.js",
+    "swaggergen": "swagger-inline ./app/*.ts --format .json --base './app/swaggerBase.yml' > ./app/swagger.json"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/syscoin/notary-endpoint.git"
+  },
+  "bugs": {
+    "url": "https://github.com/syscoin/notary-endpoint/issues"
+  },
+  "homepage": "https://github.com/syscoin/notary-endpoint#readme",
   "devDependencies": {
-    "standard": "*"
+    "@babel/core": "^7.13.10",
+    "@babel/preset-env": "^7.13.12",
+    "@babel/preset-typescript": "^7.13.0",
+    "@types/jest": "^26.0.21",
+    "@types/kue": "^0.11.13",
+    "@types/node": "^13.7.7",
+    "babel-jest": "^26.6.3",
+    "jest": "^26.6.3",
+    "supertest": "^6.1.3",
+    "swagger-inline": "^3.2.0",
+    "swagger-ui-express": "^4.1.4",
+    "ts-node-dev": "^1.0.0-pre.44",
+    "typescript": "^3.8.2"
   },
   "dependencies": {
     "bitcoinjs-lib": "^5.2.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "syscointx-js": "^1.0.82"
+    "syscointx-js": "^1.0.82",
+    "mongodb": "^3.5.4",
+    "dotenv": "^8.2.0",
+    "bignumber.js": "^9.0.0",
+    "isomorphic-fetch": "^2.2.1",
+    "systeminformation": "^4.26.10"
   }
 }
