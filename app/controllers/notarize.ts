@@ -2,7 +2,8 @@ const bitcoin = require('bitcoinjs-lib')
 const syscointx = require('syscointx-js')
 
 const WIF = 'cTTK8jcKcqffHJkoYGYxyM2LBwmDsvYimjXahzgdy94MRbupsKJF'
-const assetGuid = '341906151'
+// const assetGuid = '341906151'
+const assetGuid = '2201781193'
 const network = syscointx.utils.syscoinNetworks.testnet
 interface Error {
     status?: number;
