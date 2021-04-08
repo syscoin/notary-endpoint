@@ -10,7 +10,10 @@ module.exports = () => new Promise((resolve, reject) => {
             return reject('error while connecting to db')
         }
         const db = client.db(process.env.DB_NAME)
-
-        resolve(db.collection('orders'))
+        const collections = {
+            transactions: db.collection('transactions'),
+        }
+        resolve(collections)
     })
 })
+
