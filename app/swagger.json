@@ -62,6 +62,41 @@
           }
         }
       }
+    },
+    "/blacklist": {
+      "get": {
+        "description": "Returns the blacklist",
+        "responses": {
+          "200": {
+            "description": "Returns blacklist",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "post": {
+        "description": "Adds an address entry to the blacklist",
+        "responses": {
+          "200": {
+            "description": "Returns general VPS status",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes an address entry in the blacklist",
+        "responses": {
+          "200": {
+            "description": "Returns status",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
     }
   }
 }

@@ -13,7 +13,7 @@ module.exports = (app: any) => {
      *     schema:
      *       type: "string"
      */
-  //  app.get('/hello', (req: any, res: any) => res.send({ message: 'Hello World' }));
+    app.get('/hello', (req: any, res: any) => res.send({ message: 'Hello World' }));
 
     /**
      * @api [get] /health
@@ -24,7 +24,7 @@ module.exports = (app: any) => {
      *     schema:
      *       type: "string"
      */
-//    app.get('/health', controllers.health);
+    app.get('/health', controllers.health);
 
     /**
      * @api [post] /notarize
@@ -58,7 +58,7 @@ module.exports = (app: any) => {
      *     schema:
      *       type: "string"
      */
-    app.get('/blacklist', controllers.getBlacklist);
+    app.get('/blacklist', controllers.blacklist.getBlacklist);
     /**
      * @api [post] /blacklist
      * description: "Adds an address entry to the blacklist"
@@ -68,7 +68,7 @@ module.exports = (app: any) => {
      *     schema:
      *       type: "string"
      */
-    app.post('/blacklist', controllers.addBlacklist);
+    app.post('/blacklist', controllers.blacklist.addBlacklist);
     /**
      * @api [delete] /blacklist
      * description: "Deletes an address entry in the blacklist"
@@ -78,5 +78,5 @@ module.exports = (app: any) => {
      *     schema:
      *       type: "string"
      */
-    app.delete('/blacklist', controllers.deleteBlacklist);
+    app.delete('/blacklist', controllers.blacklist.deleteBlacklist);
 }
