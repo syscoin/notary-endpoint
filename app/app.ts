@@ -1,6 +1,6 @@
 export {};
 require("dotenv").config();
-const express = require("express");
+import express, { Application } from "express";
 const cors = require("cors");
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
@@ -11,7 +11,7 @@ const MONGO_URI = process.env.DB_URI || "mongodb://mongo:27017";
 const MONGO_DB = process.env.DB_NAME || "notarize";
 const { NODE_ENV } = process.env;
 
-const app = express();
+const app: Application = express();
 
 mongoose.connect(`${MONGO_URI}/${MONGO_DB}`, {
   useNewUrlParser: true,

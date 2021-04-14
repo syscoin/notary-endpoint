@@ -1,5 +1,5 @@
-const controllers = require('./controllers')
-const middlewares = require('./middlewares')
+const controllers = require('./controllers');
+const middlewares = require('./middlewares');
 
 module.exports = (app: any) => {
     // app = Express app
@@ -13,7 +13,7 @@ module.exports = (app: any) => {
      *     schema:
      *       type: "string"
      */
-    app.get('/hello', (req: any, res: any) => res.send({ message: 'Hello World' }))
+  //  app.get('/hello', (req: any, res: any) => res.send({ message: 'Hello World' }));
 
     /**
      * @api [get] /health
@@ -24,7 +24,7 @@ module.exports = (app: any) => {
      *     schema:
      *       type: "string"
      */
-    app.get('/health', controllers.health)
+//    app.get('/health', controllers.health);
 
     /**
      * @api [post] /notarize
@@ -47,5 +47,36 @@ module.exports = (app: any) => {
      *     schema:
      *       type: "string"
      */
-    app.post('/notarize', controllers.notarize)
+    app.post('/notarize', controllers.notarize);
+    
+    /**
+     * @api [get] /blacklist
+     * description: "Returns the blacklist"
+     * responses:
+     *   "200":
+     *     description: "Returns blacklist"
+     *     schema:
+     *       type: "string"
+     */
+    app.get('/blacklist', controllers.getBlacklist);
+    /**
+     * @api [post] /blacklist
+     * description: "Adds an address entry to the blacklist"
+     * responses:
+     *   "200":
+     *     description: "Returns general VPS status"
+     *     schema:
+     *       type: "string"
+     */
+    app.post('/blacklist', controllers.addBlacklist);
+    /**
+     * @api [delete] /blacklist
+     * description: "Deletes an address entry in the blacklist"
+     * responses:
+     *   "200":
+     *     description: "Returns status"
+     *     schema:
+     *       type: "string"
+     */
+    app.delete('/blacklist', controllers.deleteBlacklist);
 }

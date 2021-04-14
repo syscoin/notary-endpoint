@@ -1,7 +1,11 @@
-const health = require('./health')
-const notarize = require('./notarize')
+const health = require('./health');
+const notarize = require('./notarize');
+import { getBlacklist, addBlacklist, deleteBlacklist } from './blacklist';
 
 module.exports = {
     health,
-    notarize
+    notarize,
+    getBlacklist,
+    addBlacklist,
+    deleteBlacklist
 }
