@@ -47,6 +47,6 @@
     "mongodb": "^3.5.4",
     "mongoose": "^5.12.3",
     "syscointx-js": "^1.0.82",
-    "systeminformation": "^4.26.10"
+    "systeminformation": "^5.3.1",
   }
 }
