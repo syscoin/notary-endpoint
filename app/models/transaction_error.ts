@@ -2,24 +2,23 @@ export {}
 const mongoose = require('mongoose');
 
 const transactionErrorSchema = new mongoose.Schema({
-  tx: {
-    type: String,
-    required: true,
-    index: true,
+  txid: {
+    type: String
   },
   assetGuid: {
-    type: String,
-    required: true,
-    index: true
+    type: String
+  },
+  txObject: {
+    type: String
   },
   impactedAddresses: {
-    type: [String],
-    required: true
+    type: [String]
   },
-  errorType: {
-    type: String,
-    required: true
-  }
-});
+  errorTypes: {
+    type: [String]
+  },
+})
 
-module.exports = mongoose.model('transactionErrorSchema', transactionErrorSchema);
+const TransactionError = mongoose.model('TransactionError', transactionErrorSchema);
+
+module.exports = TransactionError

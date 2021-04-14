@@ -1,0 +1,67 @@
+{
+  "swagger": "2.0",
+  "host": "localhost:8001",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/hello": {
+      "get": {
+        "description": "Returns Hello World",
+        "responses": {
+          "200": {
+            "description": "Hello World",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "description": "Returns the state of the SYS node running in VPS and some additional system data.",
+        "responses": {
+          "200": {
+            "description": "Returns general VPS status",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/notarize": {
+      "post": {
+        "description": "Returns the state of the SYS node running in VPS and some additional system data.",
+        "responses": {
+          "200": {
+            "description": "Returns general VPS status",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "400": {
+            "description": "Returns error",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "403": {
+            "description": "Returns error",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Returns error",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

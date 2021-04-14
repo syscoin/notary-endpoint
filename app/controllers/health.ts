@@ -1,5 +1,6 @@
 export {}
 const system = require('systeminformation')
+var mongoose = require('mongoose');
 
 module.exports = async (req: any, res: any) => {
     // No params/body
@@ -17,7 +18,7 @@ module.exports = async (req: any, res: any) => {
 
     return res.send({
         connection: {
-            db: req.db.s.db.serverConfig.isConnected()
+            db: mongoose.connection.readyState
         },
         diskSpaceRemaining
     })
