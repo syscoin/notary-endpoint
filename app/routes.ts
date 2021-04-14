@@ -48,4 +48,15 @@ module.exports = (app: any) => {
      *       type: "string"
      */
     app.post('/notarize', controllers.notarize)
+
+    /**
+     * @api [get] /notarization-errors
+     * description: "returns a JSON array of the notarization error objects in the DB"
+     * responses:
+     *   "200":
+     *     description: "Returns general VPS status"
+     *     schema:
+     *       type: "array"
+     */
+     app.get('/notarization-errors', controllers.notarizationErrors)
 }
