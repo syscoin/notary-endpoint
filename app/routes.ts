@@ -46,6 +46,12 @@ module.exports = (app: any) => {
      *     description: "Returns error"
      *     schema:
      *       type: "string"
+     * parameters:
+     *   - in: body
+     *     name: tx
+     *     required: true
+     *     type: string
+     *     description: transaction hex to be notarized
      */
     app.post('/notarize', controllers.notarize);
     
@@ -54,11 +60,12 @@ module.exports = (app: any) => {
      * description: "Returns the blacklist"
      * responses:
      *   "200":
-     *     description: "Returns blacklist"
+     *     description: "Returns current blacklisted addresses"
      *     schema:
      *       type: "string"
      */
     app.get('/blacklist', controllers.blacklist.getBlacklist);
+
     /**
      * @api [post] /blacklist
      * description: "Adds an address entry to the blacklist"
@@ -67,8 +74,15 @@ module.exports = (app: any) => {
      *     description: "Returns general VPS status"
      *     schema:
      *       type: "string"
+     * parameters:
+     *   - in: body
+     *     name: address
+     *     required: true
+     *     type: string
+     *     description: address to be added to the blacklist
      */
     app.post('/blacklist', controllers.blacklist.addBlacklist);
+
     /**
      * @api [delete] /blacklist
      * description: "Deletes an address entry in the blacklist"
@@ -77,6 +91,12 @@ module.exports = (app: any) => {
      *     description: "Returns status"
      *     schema:
      *       type: "string"
+     * parameters:
+     *   - in: body
+     *     name: address
+     *     required: true
+     *     type: string
+     *     description: address to be removed from the blacklist
      */
     app.delete('/blacklist', controllers.blacklist.deleteBlacklist);
 }
