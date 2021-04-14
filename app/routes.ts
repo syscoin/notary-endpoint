@@ -69,10 +69,6 @@ module.exports = (app: any) => {
     /**
      * @api [post] /blacklist
      * description: "Adds an address entry to the blacklist"
-     * responses:
-     *   "200":
-     *     description: "Returns general VPS status"
-     *     schema:
      *       type: "string"
      * parameters:
      *   - in: body
@@ -99,4 +95,15 @@ module.exports = (app: any) => {
      *     description: address to be removed from the blacklist
      */
     app.delete('/blacklist', controllers.blacklist.deleteBlacklist);
-}
+
+    /**
+     * @api [get] /notarization-errors
+     * description: "returns a JSON array of the notarization error objects in the DB"
+     * responses:
+     *   "200":
+     *     description: "Returns general VPS status"
+     *     schema:
+     *       type: "array"
+     */
+     app.get('/notarization-errors', controllers.notarizationErrors);
+};

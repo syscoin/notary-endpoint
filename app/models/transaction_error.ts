@@ -3,24 +3,19 @@ const mongoose = require('mongoose');
 
 const transactionErrorSchema = new mongoose.Schema({
   txid: {
-    type: String,
-    required: true
+    type: String
   },
   assetGuid: {
-    type: String,
-    required: true
+    type: String
   },
   txObject: {
-    type: String,
-    required: true
+    type: String
   },
   impactedAddresses: {
-    type: [String],
-    required: true
+    type: [String]
   },
   errorTypes: {
-    type: [String],
-    required: true
+    type: [String]
   },
 })
 
