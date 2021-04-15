@@ -1,4 +1,4 @@
-import Blacklist from "../models"
+import Blacklist from "../models/blacklist_schema"
 
 module.exports = {
 

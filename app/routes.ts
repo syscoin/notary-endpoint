@@ -69,7 +69,13 @@ module.exports = (app: any) => {
     /**
      * @api [post] /blacklist
      * description: "Adds an address entry to the blacklist"
+     * responses:
+     *   "200":
+     *     description: "Returns status"
+     *     schema:
      *       type: "string"
+     *   "400":
+     *     description: "Bad request"
      * parameters:
      *   - in: body
      *     name: address

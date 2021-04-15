@@ -1,5 +1,5 @@
 swagger: '2.0'
-host: localhost:8001
+host: 35.233.176.30:8081
 basePath: /
 schemes:
   - http

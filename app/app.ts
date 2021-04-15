@@ -4,6 +4,7 @@ import express, { Application } from "express";
 const cors = require("cors");
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
+const bodyParser = require('body-parser')
 const routes = require("./routes");
 const mongoose = require("mongoose");
 
@@ -25,6 +26,8 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
 app.use(express.json());
 app.enable("trust proxy");
 app.use(cors());
+app.use(bodyParser.json());
+
 
 if (NODE_ENV !== "production") {
   app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
