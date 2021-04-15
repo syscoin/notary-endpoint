@@ -5,6 +5,8 @@ const WIF = "cTTK8jcKcqffHJkoYGYxyM2LBwmDsvYimjXahzgdy94MRbupsKJF";
 // const assetGuid = '341906151'
 const assetGuid = "2201781193";
 const network = syscointx.utils.syscoinNetworks.testnet;
+import Blacklist from "../models/blacklist_schema";
+
 interface Error {
   status?: number;
 }
@@ -42,6 +44,31 @@ module.exports = async (req: any, res: any, next: any) => {
         impactedAddresses.push(address);
       } catch (error) {}
     });
+
+    /* Check blacklist */
+    let foundInBlacklist: boolean = false;
+    for(let address of impactedAddresses) {
+      let count = await Blacklist.countDocuments({ address: address });
+      if (count > 0 ) {
+        foundInBlacklist = true;
+      }
+    }
+    if (foundInBlacklist) {
+      const errorType = "Transaction contains blacklisted address";
+      const error = new Error(errorType);
+      error.status = 404;
+
+      logTransactionError({
+        txid,
+        assetGuid,
+        txObject,
+        impactedAddresses,
+        errorTypes: [errorType],
+      });
+
+      next(error);
+      return;
+    }
 
     if (!tx || syscointx.utils.isAssetAllocationTx(tx.version) !== true) {
       const errorType = "Not an allocation transaction";
