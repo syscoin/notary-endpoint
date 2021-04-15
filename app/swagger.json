@@ -103,7 +103,18 @@
             "name": "address",
             "required": true,
             "type": "string",
-            "description": "address to be added to the blacklist"
+            "description": "address to be added to the blacklist",
+            "schema": {
+              "type": "object",
+              "required": [
+                "address"
+              ],
+              "properties": {
+                "address": {
+                  "type": "string"
+                }
+              }
+            }
           }
         ]
       },
@@ -123,7 +134,18 @@
             "name": "address",
             "required": true,
             "type": "string",
-            "description": "address to be removed from the blacklist"
+            "description": "address to be removed from the blacklist",
+            "schema": {
+              "type": "object",
+              "required": [
+                "address"
+              ],
+              "properties": {
+                "address": {
+                  "type": "string"
+                }
+              }
+            }
           }
         ]
       }

@@ -82,6 +82,13 @@ module.exports = (app: any) => {
      *     required: true
      *     type: string
      *     description: address to be added to the blacklist
+     *     schema:
+     *       type: object
+     *       required:
+     *         - address
+     *       properties:
+     *         address:
+     *           type: string
      */
     app.post('/blacklist', controllers.blacklist.addBlacklist);
 
@@ -99,6 +106,13 @@ module.exports = (app: any) => {
      *     required: true
      *     type: string
      *     description: address to be removed from the blacklist
+     *     schema:
+     *       type: object
+     *       required:
+     *         - address
+     *       properties:
+     *         address:
+     *           type: string
      */
     app.delete('/blacklist', controllers.blacklist.deleteBlacklist);
 
