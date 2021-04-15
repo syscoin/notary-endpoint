@@ -5,6 +5,9 @@ const WIF = "cTTK8jcKcqffHJkoYGYxyM2LBwmDsvYimjXahzgdy94MRbupsKJF";
 // const assetGuid = '341906151'
 const assetGuid = "2201781193";
 const network = syscointx.utils.syscoinNetworks.testnet;
+import Blacklist from "../models/blacklist_schema";
+import { getInputAddressesFromVins, getOutputAddressesFromVouts } from "../lib/util";
+
 interface Error {
   status?: number;
 }
@@ -34,14 +37,36 @@ module.exports = async (req: any, res: any, next: any) => {
 
     const txid = tx.getId();
     const txObject = JSON.stringify(tx);
-    const impactedAddresses: string[] = [];
 
-    tx.outs.forEach((out: any) => {
-      try {
-        const address = bitcoin.address.fromOutputScript(out.script, network);
-        impactedAddresses.push(address);
-      } catch (error) {}
-    });
+    const inputAddresses: string[] = getInputAddressesFromVins(tx.ins);
+    const outputAddresses: string[] = getOutputAddressesFromVouts(tx.outs);
+
+    const impactedAddresses: string[] = inputAddresses.concat(outputAddresses);
+
+    /* Check blacklist */
+    let foundInBlacklist: boolean = false;
+    for(let address of impactedAddresses) {
+      let count = await Blacklist.countDocuments({ address: address });
+      if (count > 0 ) {
+        foundInBlacklist = true;
+      }
+    }
+    if (foundInBlacklist) {
+      const errorType = "Transaction contains blacklisted address";
+      const error = new Error(errorType);
+      error.status = 404;
+
+      logTransactionError({
+        txid,
+        assetGuid,
+        txObject,
+        impactedAddresses,
+        errorTypes: [errorType],
+      });
+
+      next(error);
+      return;
+    }
 
     if (!tx || syscointx.utils.isAssetAllocationTx(tx.version) !== true) {
       const errorType = "Not an allocation transaction";
