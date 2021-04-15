@@ -23,7 +23,7 @@ module.exports = {
     },
 
     deleteBlacklist : function(req: any, res: any) {
-        const blacklistEntry = Blacklist.deleteOne({ _id: req.params.id }, (err: any) => {
+        const blacklistEntry = Blacklist.deleteOne(req.body, (err: any) => {
             if (err) {
                 res.send(err);
             } else {
