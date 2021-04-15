@@ -1,4 +1,5 @@
 const bitcoin = require("bitcoinjs-lib");
+const syscointx = require("syscointx-js");
 const network = syscointx.utils.syscoinNetworks.testnet;
 
 export function getInputAddressesFromVins(ins) {
