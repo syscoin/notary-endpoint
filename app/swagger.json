@@ -66,8 +66,18 @@
             "in": "body",
             "name": "tx",
             "required": true,
-            "type": "string",
-            "description": "transaction hex to be notarized"
+            "description": "transaction hex to be notarized",
+            "schema": {
+              "type": "object",
+              "required": [
+                "tx"
+              ],
+              "properties": {
+                "address": {
+                  "type": "string"
+                }
+              }
+            }
           }
         ]
       }
@@ -80,7 +90,9 @@
             "description": "Returns current blacklisted addresses",
             "schema": {
               "type": "array",
-              "items": "string"
+              "items": {
+                "type": "string"
+              }
             }
           }
         }
@@ -173,11 +185,15 @@
                   },
                   "impactedAddresses": {
                     "type": "array",
-                    "items": "string"
+                    "items": {
+                      "type": "string"
+                    }
                   },
                   "errorTypes": {
                     "type": "array",
-                    "items": "string"
+                    "items": {
+                      "type": "string"
+                    }
                   }
                 }
               }

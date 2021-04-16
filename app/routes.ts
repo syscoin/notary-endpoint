@@ -50,8 +50,14 @@ module.exports = (app: any) => {
      *   - in: body
      *     name: tx
      *     required: true
-     *     type: string
      *     description: transaction hex to be notarized
+     *     schema:
+     *       type: object
+     *       required:
+     *         - tx
+     *       properties:
+     *         address:
+     *           type: string
      */
     app.post('/notarize', controllers.notarize);
     
@@ -63,7 +69,8 @@ module.exports = (app: any) => {
      *     description: "Returns current blacklisted addresses"
      *     schema:
      *       type: "array"
-     *       items: "string"
+     *       items:
+     *         type: "string"
      */
     app.get('/blacklist', controllers.blacklist.getBlacklist);
 
@@ -136,10 +143,12 @@ module.exports = (app: any) => {
      *             type: "string"
      *           impactedAddresses:
      *             type: "array"
-     *             items: "string"
+     *             items:
+     *               type: "string"
      *           errorTypes:
      *             type: "array"
-     *             items: "string"
+     *             items:
+     *               type: "string"
      */
      app.get('/notarization-errors', controllers.notarizationErrors);
 };
