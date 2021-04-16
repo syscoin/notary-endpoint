@@ -131,7 +131,24 @@ module.exports = (app: any) => {
      *   "200":
      *     description: "Returns record of notarization errors"
      *     schema:
-     *       type: "string"
+     *       type: "array"
+     *       items:
+     *         type: "object"
+     *         properties:
+     *           txid:
+     *             type: "string"
+     *           assetGuid:
+     *             type: "string"
+     *           txObject:
+     *             type: "string"
+     *           impactedAddresses:
+     *             type: "array"
+     *             items:
+     *               type: "string"
+     *           errorTypes:
+     *             type: "array"
+     *             items:
+     *               type: "string"
      */
      app.get('/notarization-errors', controllers.notarizationErrors.getNotarizationErrors);
 
