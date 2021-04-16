@@ -1,7 +1,6 @@
-export {};
-const TransactionError = require("../models/transaction_error");
+import TransactionError from "../models/transaction_error";
 
-module.exports = {
+export default {
   getNotarizationErrors: async (req: any, res: any) => {
     try {
       const notarizationErrors = await TransactionError.find({});

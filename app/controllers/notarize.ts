@@ -1,21 +1,22 @@
-const bitcoin = require("bitcoinjs-lib");
-const syscointx = require("syscointx-js");
-const logTransactionError = require("../lib/logTransactionError");
-const WIF = "cTTK8jcKcqffHJkoYGYxyM2LBwmDsvYimjXahzgdy94MRbupsKJF";
-// const assetGuid = '341906151'
-const assetGuid = "2201781193";
-const network = syscointx.utils.syscoinNetworks.testnet;
+import bitcoin from "bitcoinjs-lib";
+import syscointx from "syscointx-js";
+import logTransactionError from "../lib/logTransactionError";
 import Blacklist from "../models/blacklist_schema";
 import {
   getInputAddressesFromVins,
   getOutputAddressesFromVouts
 } from "../lib/util";
 
+const WIF = "cTTK8jcKcqffHJkoYGYxyM2LBwmDsvYimjXahzgdy94MRbupsKJF";
+// const assetGuid = '341906151'
+const assetGuid = "2201781193";
+const network = syscointx.utils.syscoinNetworks.testnet;
+
 interface Error {
   status?: number;
 }
 
-module.exports = async (req: any, res: any, next: any) => {
+export default async (req: any, res: any, next: any) => {
   if (req.body && req.body.tx) {
     const txHex = req.body.tx;
     let tx = null;
@@ -47,9 +48,9 @@ module.exports = async (req: any, res: any, next: any) => {
     const impactedAddresses: string[] = inputAddresses.concat(outputAddresses);
 
     /* Check blacklist */
-    let foundInBlacklist: boolean = false;
-    for (let address of impactedAddresses) {
-      let count = await Blacklist.countDocuments({ address: address });
+    let foundInBlacklist = false;
+    for (const address of impactedAddresses) {
+      const count = await Blacklist.countDocuments({ address: address });
       if (count > 0) {
         foundInBlacklist = true;
       }

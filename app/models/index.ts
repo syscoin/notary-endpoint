@@ -1,7 +1,7 @@
-const transactionErrorSchema = require('./transaction_error')
-const Blacklist = require('./blacklist_schema')
+import transactionErrorSchema from "./transaction_error";
+import Blacklist from "./blacklist_schema";
 
-module.exports = { 
-    transactionErrorSchema,
-    Blacklist
-}
+export default {
+  transactionErrorSchema,
+  Blacklist
+};

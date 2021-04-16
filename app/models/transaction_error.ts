@@ -1,5 +1,4 @@
-export {}
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
 const transactionErrorSchema = new mongoose.Schema({
   txid: {
@@ -16,9 +15,12 @@ const transactionErrorSchema = new mongoose.Schema({
   },
   errorTypes: {
     type: [String]
-  },
-})
+  }
+});
 
-const TransactionError = mongoose.model('TransactionError', transactionErrorSchema);
+const TransactionError = mongoose.model(
+  "TransactionError",
+  transactionErrorSchema
+);
 
-module.exports = TransactionError
+export default TransactionError;

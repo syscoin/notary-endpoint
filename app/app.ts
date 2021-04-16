@@ -1,12 +1,13 @@
-export {};
-require("dotenv").config();
+import dotenv from "dotenv";
 import express, { Application } from "express";
-const cors = require("cors");
-const swaggerUi = require("swagger-ui-express");
-const swaggerDocument = require("./swagger.json");
-const bodyParser = require('body-parser')
-const routes = require("./routes");
-const mongoose = require("mongoose");
+import cors from "cors";
+import swaggerUi from "swagger-ui-express";
+import swaggerDocument from "./swagger.json";
+import bodyParser from "body-parser";
+import routes from "./routes";
+import mongoose from "mongoose";
+
+dotenv.config();
 
 const MONGO_URI = process.env.DB_URI || "mongodb://mongo:27017";
 const MONGO_DB = process.env.DB_NAME || "notarize";
@@ -16,7 +17,7 @@ const app: Application = express();
 
 mongoose.connect(`${MONGO_URI}/${MONGO_DB}`, {
   useNewUrlParser: true,
-  useUnifiedTopology: true,
+  useUnifiedTopology: true
 });
 
 const db = mongoose.connection;
@@ -28,7 +29,6 @@ app.enable("trust proxy");
 app.use(cors());
 app.use(bodyParser.json());
 
-
 if (NODE_ENV !== "production") {
   app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 }
@@ -38,11 +38,11 @@ app.use((error: any, req: any, res: any, next: any) => {
   res.status(error.status || 500).send({
     error: {
       status: error.status || 500,
-      message: error.message || "Internal Server Error",
-    },
+      message: error.message || "Internal Server Error"
+    }
   });
 });
 
 routes(app);
 
-module.exports = app;
+export default app;

@@ -1,11 +1,11 @@
-const health = require('./health');
-const notarize = require('./notarize');
-const blacklist = require('./blacklist');
-const notarizationErrors = require('./notarizationErrors');
+import health from "./health";
+import notarize from "./notarize";
+import blacklist from "./blacklist";
+import notarizationErrors from "./notarizationErrors";
 
-module.exports = {
-    health,
-    notarize,
-    blacklist,
-    notarizationErrors
-}
+export default {
+  health,
+  notarize,
+  blacklist,
+  notarizationErrors
+};
