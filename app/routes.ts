@@ -62,7 +62,8 @@ module.exports = (app: any) => {
      *   "200":
      *     description: "Returns current blacklisted addresses"
      *     schema:
-     *       type: "string"
+     *       type: "array"
+     *       items: "string"
      */
     app.get('/blacklist', controllers.blacklist.getBlacklist);
 
@@ -121,9 +122,24 @@ module.exports = (app: any) => {
      * description: "returns a JSON array of the notarization error objects in the DB"
      * responses:
      *   "200":
-     *     description: "Returns general VPS status"
+     *     description: "Returns record of notarization errors"
      *     schema:
      *       type: "array"
+     *       items:
+     *         type: "object"
+     *         properties:
+     *           txid:
+     *             type: "string"
+     *           assetGuid:
+     *             type: "string"
+     *           txObject:
+     *             type: "string"
+     *           impactedAddresses:
+     *             type: "array"
+     *             items: "string"
+     *           errorTypes:
+     *             type: "array"
+     *             items: "string"
      */
      app.get('/notarization-errors', controllers.notarizationErrors);
 };

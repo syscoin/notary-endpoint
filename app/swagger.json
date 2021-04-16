@@ -79,7 +79,8 @@
           "200": {
             "description": "Returns current blacklisted addresses",
             "schema": {
-              "type": "string"
+              "type": "array",
+              "items": "string"
             }
           }
         }
@@ -155,9 +156,31 @@
         "description": "returns a JSON array of the notarization error objects in the DB",
         "responses": {
           "200": {
-            "description": "Returns general VPS status",
+            "description": "Returns record of notarization errors",
             "schema": {
-              "type": "array"
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "txid": {
+                    "type": "string"
+                  },
+                  "assetGuid": {
+                    "type": "string"
+                  },
+                  "txObject": {
+                    "type": "string"
+                  },
+                  "impactedAddresses": {
+                    "type": "array",
+                    "items": "string"
+                  },
+                  "errorTypes": {
+                    "type": "array",
+                    "items": "string"
+                  }
+                }
+              }
             }
           }
         }
