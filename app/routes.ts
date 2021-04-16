@@ -43,7 +43,7 @@ module.exports = (app: any) => {
      *     schema:
      *       type: "string"
      *   "404":
-     *     description: "Returns error: Invalid tx; not an asset tx of right asset guid or cannot get notary sighash"
+     *     description: "Returns error: Invalid tx; not an asset tx of right asset guid or cannot get notary sighash or blacklisted"
      *     schema:
      *       type: "string"
      * parameters:
