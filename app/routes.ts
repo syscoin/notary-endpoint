@@ -28,22 +28,22 @@ module.exports = (app: any) => {
 
     /**
      * @api [post] /notarize
-     * description: "Returns the state of the SYS node running in VPS and some additional system data."
+     * description: "Submits a tx to be notarized"
      * responses:
      *   "200":
-     *     description: "Returns general VPS status"
+     *     description: "Returns notarized output"
      *     schema:
      *       type: "string"
      *   "400":
-     *     description: "Returns error"
+     *     description: "Returns error: Could not add notary signature"
      *     schema:
      *       type: "string"
      *   "403":
-     *     description: "Returns error"
+     *     description: "Returns error: Could not sign notary sighash"
      *     schema:
      *       type: "string"
      *   "404":
-     *     description: "Returns error"
+     *     description: "Returns error: Invalid tx; not an asset tx of right asset guid or cannot get notary sighash"
      *     schema:
      *       type: "string"
      * parameters:
