@@ -6,7 +6,10 @@ const WIF = "cTTK8jcKcqffHJkoYGYxyM2LBwmDsvYimjXahzgdy94MRbupsKJF";
 const assetGuid = "2201781193";
 const network = syscointx.utils.syscoinNetworks.testnet;
 import Blacklist from "../models/blacklist_schema";
-import { getInputAddressesFromVins, getOutputAddressesFromVouts } from "../lib/util";
+import {
+  getInputAddressesFromVins,
+  getOutputAddressesFromVouts
+} from "../lib/util";
 
 interface Error {
   status?: number;
@@ -29,7 +32,7 @@ module.exports = async (req: any, res: any, next: any) => {
         assetGuid: assetGuid,
         txObject: null,
         impactedAddresses: [],
-        errorTypes: [errorType],
+        errorTypes: [errorType]
       });
 
       next(error);
@@ -45,9 +48,9 @@ module.exports = async (req: any, res: any, next: any) => {
 
     /* Check blacklist */
     let foundInBlacklist: boolean = false;
-    for(let address of impactedAddresses) {
+    for (let address of impactedAddresses) {
       let count = await Blacklist.countDocuments({ address: address });
-      if (count > 0 ) {
+      if (count > 0) {
         foundInBlacklist = true;
       }
     }
@@ -61,7 +64,7 @@ module.exports = async (req: any, res: any, next: any) => {
         assetGuid,
         txObject,
         impactedAddresses,
-        errorTypes: [errorType],
+        errorTypes: [errorType]
       });
 
       next(error);
@@ -78,7 +81,7 @@ module.exports = async (req: any, res: any, next: any) => {
         assetGuid,
         txObject,
         impactedAddresses,
-        errorTypes: [errorType],
+        errorTypes: [errorType]
       });
 
       next(error);
@@ -96,7 +99,7 @@ module.exports = async (req: any, res: any, next: any) => {
         assetGuid,
         txObject,
         impactedAddresses,
-        errorTypes: [errorType],
+        errorTypes: [errorType]
       });
 
       next(error);
@@ -115,29 +118,43 @@ module.exports = async (req: any, res: any, next: any) => {
         assetGuid,
         txObject,
         impactedAddresses,
-        errorTypes: [errorType],
+        errorTypes: [errorType]
       });
 
       next(error);
       return;
     }
 
-    if (
-      syscointx.signNotarizationSigHashesWithWIF(assets, WIF, network) !== true
-    ) {
+    let signature = null;
+    try {
+      signature = syscointx.signNotarizationSigHashesWithWIF(
+        assets,
+        WIF,
+        network
+      );
+    } catch (e) {}
+
+    if (signature !== true) {
       const errorType = "Could not sign notary sighash";
       const error = new Error(errorType);
       error.status = 403;
 
-      logTransactionError({
+      const notarizationError = await logTransactionError({
         txid,
         assetGuid,
         txObject,
         impactedAddresses,
-        errorTypes: [errorType],
+        errorTypes: [errorType]
       });
 
-      next(error);
+      res.status(error.status).send({
+        error: {
+          status: error.status,
+          message: error.message,
+          notarizationError
+        }
+      });
+
       return;
     }
 
@@ -153,7 +170,7 @@ module.exports = async (req: any, res: any, next: any) => {
         assetGuid,
         txObject,
         impactedAddresses,
-        errorTypes: [errorType],
+        errorTypes: [errorType]
       });
 
       next(error);
@@ -171,7 +188,7 @@ module.exports = async (req: any, res: any, next: any) => {
       assetGuid,
       txObject: null,
       impactedAddresses: [],
-      errorTypes: [errorType],
+      errorTypes: [errorType]
     });
 
     next(error);
