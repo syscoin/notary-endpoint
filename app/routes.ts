@@ -28,30 +28,36 @@ module.exports = (app: any) => {
 
     /**
      * @api [post] /notarize
-     * description: "Returns the state of the SYS node running in VPS and some additional system data."
+     * description: "Submits a tx to be notarized"
      * responses:
      *   "200":
-     *     description: "Returns general VPS status"
+     *     description: "Returns notarized output"
      *     schema:
      *       type: "string"
      *   "400":
-     *     description: "Returns error"
+     *     description: "Returns error: Could not add notary signature"
      *     schema:
      *       type: "string"
      *   "403":
-     *     description: "Returns error"
+     *     description: "Returns error: Could not sign notary sighash"
      *     schema:
      *       type: "string"
      *   "404":
-     *     description: "Returns error"
+     *     description: "Returns error: Invalid tx; not an asset tx of right asset guid or cannot get notary sighash or blacklisted"
      *     schema:
      *       type: "string"
      * parameters:
      *   - in: body
      *     name: tx
      *     required: true
-     *     type: string
      *     description: transaction hex to be notarized
+     *     schema:
+     *       type: object
+     *       required:
+     *         - tx
+     *       properties:
+     *         address:
+     *           type: string
      */
     app.post('/notarize', controllers.notarize);
     
@@ -62,7 +68,9 @@ module.exports = (app: any) => {
      *   "200":
      *     description: "Returns current blacklisted addresses"
      *     schema:
-     *       type: "string"
+     *       type: "array"
+     *       items:
+     *         type: "string"
      */
     app.get('/blacklist', controllers.blacklist.getBlacklist);
 
@@ -121,7 +129,7 @@ module.exports = (app: any) => {
      * description: "returns a JSON array of the notarization error objects in the DB"
      * responses:
      *   "200":
-     *     description: "Returns general VPS status"
+     *     description: "Returns record of notarization errors"
      *     schema:
      *       type: "string"
      */
