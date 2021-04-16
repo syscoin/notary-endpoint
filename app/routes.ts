@@ -123,7 +123,18 @@ module.exports = (app: any) => {
      *   "200":
      *     description: "Returns general VPS status"
      *     schema:
-     *       type: "array"
+     *       type: "string"
      */
-     app.get('/notarization-errors', controllers.notarizationErrors);
+     app.get('/notarization-errors', controllers.notarizationErrors.getNotarizationErrors);
+
+     /**
+     * @api [delete] /notarization-errors
+     * description: "Deletes all notarization errors"
+     * responses:
+     *   "200":
+     *     description: "Returns status"
+     *     schema:
+     *       type: "string"
+     */
+      app.delete('/notarization-errors', controllers.notarizationErrors.deleteNotarizationErrors);
 };
